@@ -1,0 +1,12 @@
+.app-main{
+  display: flex;
+}
+
+.app-nav{
+  width: 20%;
+}
+.app-content{
+  width: 70%;
+  padding: 20px;
+  margin: 0 auto;
+}

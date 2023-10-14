@@ -1,0 +1,108 @@
+/* Use variables for consistent design and easy modification */
+:root {
+    --primary-bg-color: #28a745; /* green, for the btn-success */
+    --primary-bg-hover: blue; /* darker green, for hover effect */
+    --input-bg-color: #f4f5f7;
+    --input-border-color: #d4d5d7;
+    --input-border-focus: #c3c4c6;
+    --input-shadow-focus: 0px 0px 5px rgba(60, 64, 67, 0.2);
+  }
+  
+  .searchInput_Container {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* spacing between input and button */
+  }
+  
+  #searchInput {
+    flex-grow: 1; /* take maximum available space */
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid var(--input-border-color);
+    background-color: var(--input-bg-color);
+    outline: none;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  #searchInput:focus {
+    border-color: var(--input-border-focus);
+    box-shadow: var(--input-shadow-focus);
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    color: #12a89d;
+  }
+  
+  .btn-success {
+    background-color: #12a89d;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn-success:hover {
+    background-color: #1c8e86;
+  }
+
+  /* .scroll-container {
+    display: flex;       
+    overflow-x: auto;    
+    width: 100%;         
+    gap: 10px;           
+    
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
+}
+
+.scroll-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.1);
+} */
+
+.home-image-wrapper{
+    height: 200px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+    border-radius: 10px; 
+    overflow: hidden;    
+}
+
+.home-image-wrapper img{
+  width: 100%;
+  height: 80%;
+  object-fit: cover;
+}
+
+
+.caption {
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+  /* the slides */
+  .slick-slide > div{
+    margin: 0 10px;
+}
+
+.home-images{
+  width: 100%;
+  height: 300px;
+  border-radius: 15px;
+  overflow: hidden;
+}
+.home-images img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
