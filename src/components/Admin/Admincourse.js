@@ -22,7 +22,7 @@ function Admincourse() {
           setOriginalData(res.data.Result);
           setFilteredData(res.data.Result); // Initialize filteredData with original data
         } else {
-          alert("Error");
+          alert("Error"); 
         }
       })
       .catch((err) => console.log(err));
