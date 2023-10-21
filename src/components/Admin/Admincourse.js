@@ -1,37 +1,55 @@
-import axios from 'axios';
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import "./EditCourse.css"; 
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom"; // Added useNavigate import
+import axios from "axios";
+import "./Admincourse.css";
+import settings, { carousel } from "../common-components/slick";
+import Slider from "react-slick";
+import { FaEdit, FaTrash } from 'react-icons/fa';
 
-function Addcourse() {
-  const [formValues, setFormValues] = useState({
-    coursename: '',
-    imgurl: '',
-    description: '',
-    duration: ''
-  });
+function Admincourse() {
+  const navigate = useNavigate();  // Hook to navigate to another route
+  
+  const [originalData, setOriginalData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    axios
+      .get("http://localhost:8081/getcourses")
+      .then((res) => {
+        if (res.data.Status === "Success") {
+          console.log(res.data.Result);
+          setOriginalData(res.data.Result);
+          setFilteredData(res.data.Result); // Initialize filteredData with original data
+        } else {
+          alert("Error");
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
-  const handleInput = event => {
-    const { name, value } = event.target;
-    setFormValues(prev => ({ ...prev, [name]: value }));
+  const handleSearch = (event) => {
+    event.preventDefault();
+    const filteredResults = originalData.filter((item) =>
+      item.coursename.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredData(filteredResults);
   };
 
-  const handleSubmit = event => {
-    event.preventDefault();
+  const handleDelete = id => {
     axios
-      .post(`http://localhost:8081/addcourse`, formValues)
+      .delete(`http://localhost:8081/deletecourse/${id}`)
       .then(res => {
-        if (res.data.status === 'Success') {
-          navigate('/admincourses');
+        if (res.data.Status === 'Success') {
+          // Reload the page or update the state as needed
+          window.location.reload(true);
         } else {
-          alert('Error: Unable to add course');
+          alert('Error: Unable to delete course');
         }
       })
       .catch(err => {
-        console.error('Error while adding course:', err);
-        alert('Error: Unable to add course');
+        console.error('Error while deleting course:', err);
+        alert('Error: Unable to delete course');
       });
   };
 
@@ -41,64 +59,58 @@ function Addcourse() {
         <div><br /></div>
         <div></div>
       </div>
-      <center>
-        <h2>Add Course</h2>
-      </center>
-      <div className="d-flex justify-content-center align-items-center vh-100 addpage">
-        <div className="p-1 rounded w-25 border addform">
-          <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <input 
-                type="text"
-                value={formValues.coursename}
-                className="form-control"
-                name="coursename"
-                placeholder="Enter Course Name"
-                onChange={handleInput}
-              />
-            </div>
-            <div className="mb-3">
-              <input
-                type="text"
-                value={formValues.imgurl}
-                className="form-control"
-                name="imgurl"
-                placeholder="Enter the image url"
-                onChange={handleInput}
-              />
-            </div>
-            <div className="mb-3">
-              <input
-              type="text"
-                value={formValues.description}
-                className="form-control"
-                name="description"
-                placeholder="Enter the course description"
-                onChange={handleInput}
-              />
-            </div>
-            <div className="mb-3">
-              <input
-                type="text"
-                value={formValues.duration}
-                className="form-control"
-                name="duration"
-                placeholder="Enter the course duration"
-                onChange={handleInput}
-              />
-            </div>
-            <div className="mb-3">
-              <button
-                type="submit"
-                className="btn btn-success">
-                Add Course
-              </button>
-            </div>
-          </form>
+      
+      <div className="templateContainer">
+        <div className="searchInput_Container">
+          <input
+            id="searchInput"
+            type="text"
+            placeholder="Type here to search course"
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.target.value)}
+          />
+          <button
+            className="btn btn-success w-10"
+            type="submit"
+            onClick={handleSearch}
+          >
+            Search
+          </button>
         </div>
+        <h2 id="courses-avai">Courses Available</h2>
+        <Slider {...settings}>
+          {filteredData.length > 0 ? (
+            filteredData.map((val) => {
+              return (
+                <div className="course-image-wrapper" key={val.id}>
+                  <Link to={"/enrollcourse"}>
+                    <img src={val.imgurl} alt="" />
+                  </Link>
+                  <div className="course-details">
+                    <h3 className="course-name">{val.coursename}</h3>
+                    <p className="course-description">{val.description}</p>
+                    <p className="course-duration">Duration:{val.duration}</p>
+                    <div className="icon-wrapper">
+                      <Link to={`/editcourse/` + val.id}>
+                        <FaEdit />
+                      </Link>
+                      <Link onClick={e => handleDelete(val.id)} id="deleteCourse" className="deleteButton">
+                        <FaTrash />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <p>No courses found.</p>
+          )}
+        </Slider>
+        <br></br>
+        <button className="add-course-button" onClick={() => navigate('/addcourse')}>Add Course</button> {/* "Add Course" button */}
       </div>
     </>
   );
 }
 
-export default Addcourse;
+export default Admincourse;

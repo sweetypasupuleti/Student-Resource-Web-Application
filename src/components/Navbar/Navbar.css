@@ -1,10 +1,13 @@
 .nav-main{
     display: flex;
     height: 100vh;
+    width: 20%;
     flex-direction: column;
     justify-content: space-between;
     background-color: #12a89d;
     color: white;
+    position: fixed;
+    border-radius: 0 20px 20px 0;
 }
 .nav-wrapper{
     flex: 1;
@@ -21,7 +24,6 @@
     width: 40px;
     border-radius: 50%;
     overflow: hidden;
-    cursor: pointer;
     color: white;
 }
 .image{
@@ -29,10 +31,33 @@
     width: 100%;
 }
 .user-name{
-    font-size: 15px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 400;
     cursor: pointer;
+    margin-bottom: 10px;
 }
+.user-name-button {
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    margin-top: 5%;
+    margin-bottom: 10px;
+    background-color: white;
+    border: none;          /* Remove default button borders */
+    padding: 5px 15px;     /* Add some padding for a button-like appearance */
+    border-radius: 4px;    /* Optional: gives the button rounded corners */
+    transition: background-color 0.3s ease; /* Optional: smooth transition for hover effect */
+}
+
+.user-name-button:hover {
+    background-color: cyan;  /* Slight change on hover for feedback */
+}
+
+.user-name-button:focus {
+    outline: none; /* Removes default focus outline */
+    box-shadow: 0 0 5px rgba(0,0,0,0.3); /* Adds a shadow for focus feedback */
+}
+
 .nav-names{
     display: flex;
     color: white;

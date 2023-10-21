@@ -10,9 +10,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Addcourse from './components/Admin/Addcourse';
 import Login from './components/Login/Login';
-import Signup from './components/Signup/Signup';
-import Alogin from './components/Admin/Login/Alogin'; // Fixed typo
-import Asignup from './components/Admin/Signup/Asignup';
+
+
 
 function App() {
   return (
@@ -29,9 +28,6 @@ function App() {
             <Route path='/editcourse/:id' element={<EditCourse />}></Route>
             <Route path='/addcourse' element={<Addcourse/>}/>
             <Route path='/login' element={<Login/>}/>
-            <Route path='/signup' element={<Signup/>}/>
-            <Route path='/adminlogin' element={<Alogin/>}/>
-            <Route path='/adminsignup' element={<Asignup/>}/>
           </Routes>
         </div>
       </div>
