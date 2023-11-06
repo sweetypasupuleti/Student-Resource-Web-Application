@@ -1,0 +1,63 @@
+/* Progress.css */
+
+.templateContainer2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .template_ContainerEnroll1 {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  .template2 {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 2px solid #3498db;
+    border-radius: 10px;
+    background: linear-gradient(to bottom, #54bbff, white);
+    transition: transform 0.2s;
+    cursor: pointer;
+    justify-content: left;
+    color: #fff; /* Text color, if needed */
+}
+.status{
+background-color: rgb(10, 228, 10);
+margin-left:85%;
+}
+
+  
+  .template1:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(52, 152, 219, 0.5);
+    border-color: #9b59b6;
+  }
+  
+  #enrolledCourse {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  h4 {
+    margin: 10px 0;
+    font-size: 20px;
+    color: #333;
+  }
+  
+  p {
+    text-align: center;
+    font-size: 18px;
+    color: #555;
+  }
+  
+  
+  
