@@ -1,0 +1,63 @@
+.language-selection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-top: 5%;
+  }
+  
+  .language-selection strong {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .language-buttons {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .language-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-left: 40px;
+  
+  }
+  
+  .language-btn.selected {
+    background-color: green;
+    transform: scale(1.05);
+  }
+  
+  .language-btn:hover {
+    background-color: green;
+  }
+  
+  .start-button {
+    background-color: #12a89d;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 24px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+    margin-left: 40%;
+  }
+  
+  .start-button:hover {
+    background-color: #0f9377;
+  }
+  .quizhead{
+    margin-top: 10%;
+  }
