@@ -1,0 +1,128 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Calendar Styles */
+  .react-big-calendar {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  
+  .rbc-event {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  .rbc-event:hover {
+    transform: scale(1.05);
+  }
+  
+  .rbc-event-title {
+    font-weight: bold;
+  }
+  
+  /* Date Picker Styles */
+  .react-date-picker {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+  
+  .react-date-picker__calendar {
+    z-index: 2;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Add Event Form Styles */
+  .add-events-admin {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .add-events-header {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .add-event-dates {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  
+  .add-event-dates div {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .add-events-title {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+  }
+  
+  .add-event-button {
+    background-color: #27ae60;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
+  }
+  
+  .add-event-button:hover {
+    background-color: #219e54;
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 768px) {
+    .container {
+      padding: 10px;
+    }
+  
+    .react-big-calendar {
+      font-size: 14px;
+    }
+  
+    .react-date-picker {
+      font-size: 14px;
+    }
+  
+    .add-events-admin {
+      font-size: 14px;
+    }
+  }
+  
