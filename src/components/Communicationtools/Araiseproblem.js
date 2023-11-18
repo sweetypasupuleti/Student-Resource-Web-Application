@@ -41,7 +41,7 @@ function Araiseproblem() {
 
     // Call backend to update status
     axios
-      .put("${API_BASE_URL}/updateproblem", {
+      .put("http://localhost:8081/updateproblem", {
         id: id,
         stat: newStatus,
       })
@@ -67,7 +67,7 @@ function Araiseproblem() {
 
   useEffect(() => {
     axios
-      .get("${API_BASE_URL}/getproblem")
+      .get("http://localhost:8081/getproblem")
       .then((res) => {
         if (res.data.Status === "Success") {
           console.log(res.data.Result);
@@ -91,7 +91,7 @@ function Araiseproblem() {
   const handleDeleteRow = (id) => {
     // Call the server to delete the row
     axios
-    .delete(`${API_BASE_URL}/deleteproblem/${id}`)
+    .delete(`http://localhost:8081/deleteproblem/${id}`)
     .then(res => {
       if (res.data.Status === 'Success') {
         window.location.reload(true);
@@ -151,7 +151,7 @@ function Araiseproblem() {
                   let buttonText, buttonColor;
 
                   if (currentStatus === "unverified") {
-                    buttonText = "Contribute";
+                    buttonText = "Approve";
                     buttonColor = "lightgrey";
                   } else {
                     buttonText = "Verified";

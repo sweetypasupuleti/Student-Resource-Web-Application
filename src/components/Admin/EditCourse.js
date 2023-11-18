@@ -14,7 +14,12 @@ function EditCourse() {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  
+  useEffect(() => {
+		const isAuthenticated = localStorage.getItem('authenticatedAdmin');
+		if (isAuthenticated !== 'true') {
+		  navigate('/login');
+		}
+	  });
 
   useEffect(() => {
     axios.get(`http://localhost:8081/getcourses/` + id)

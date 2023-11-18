@@ -1,0 +1,48 @@
+/* Add your styles here */
+
+
+/* h1 {
+  color: #333;
+}
+
+form {
+  max-width: 600px;
+  margin: auto;
+} */
+
+
+/* 
+label {
+  display: block;
+  margin-bottom: 5px;
+} */
+
+/* input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+} */
+
+/* button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+} */
+
+.update-prof{
+  padding: 10px 20px;
+  background-color: #12a89d;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  margin-left: 50%;
+}
+
+/* Add more styles as needed */

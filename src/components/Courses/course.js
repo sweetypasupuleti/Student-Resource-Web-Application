@@ -2,29 +2,32 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./course.css";
+//eslint-disable-next-line
 import settings, { carousel } from "../common-components/slick";
 import Slider from "react-slick";
-
 function Course() {
   const [originalData, setOriginalData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-
-  useEffect(() => {
+  const fetchCourseData = () => {
     axios
       .get("http://localhost:8081/getcourses")
       .then((res) => {
         if (res.data.Status === "Success") {
           console.log(res.data.Result);
           setOriginalData(res.data.Result);
-          setFilteredData(res.data.Result); // Initialize filteredData with original data
+          setFilteredData(res.data.Result);
         } else {
           alert("Error");
         }
       })
       .catch((err) => console.log(err));
+  };
+  
+  useEffect(() => {
+    fetchCourseData();
   }, []);
-
+  
   const handleSearch = (event) => {
     event.preventDefault();
     const filteredResults = originalData.filter((item) =>
@@ -32,7 +35,7 @@ function Course() {
     );
     setFilteredData(filteredResults);
   };
-
+  const isAuthenticated = localStorage.getItem('authenticatedUser');
   return (
     <>
       <div className="body">
@@ -67,13 +70,12 @@ function Course() {
             filteredData.map((val) => {
               return (
                 <div className="course-image-wrapper" key={val.id}>
-                  <Link to={"/enrollcourse"}>
                     <img src={val.imgurl} alt="" />
-                  </Link>
                   <div className="course-details">
                     <h3 className="course-name">{val.coursename}</h3>
                     <p className="course-description">{val.description}</p>
                     <p className="course-duration">Duration:{val.duration}</p>
+                    {isAuthenticated && <Link to={`/enrollcourse/`+val.id} id="enrollCourse" className="btn btn-success"  style={{ textDecoration: 'none' }} type="button">Enroll</Link>}
                   </div>
                 </div>
               );

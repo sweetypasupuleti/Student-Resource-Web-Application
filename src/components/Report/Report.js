@@ -34,13 +34,13 @@ const Report = () => {
         <div className="user-info">
           <center>
           <br></br>
-          <h2>Welcome, {user.firstname}, See Your Scores Here !!!</h2>
+          <h2>Welcome, {user.firstname}, See Your Quiz Performance Here !!!</h2>
           </center>
         </div>
       )}
       <center>
       <div className="game-stats">
-        <h3>Game Statistics:</h3>
+        <h3>Quiz Statistics:</h3>
         <table>
           <thead>
             <tr>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"; // Added useNavigate import
 import axios from "axios";
 import "./Admincourse.css";
+// eslint-disable-next-line
 import settings, { carousel } from "../common-components/slick";
 import Slider from "react-slick";
 import { FaEdit, FaTrash } from 'react-icons/fa';
@@ -22,36 +23,48 @@ function Admincourse() {
           setOriginalData(res.data.Result);
           setFilteredData(res.data.Result); // Initialize filteredData with original data
         } else {
-          alert("Error"); 
+          alert("Error");
         }
       })
       .catch((err) => console.log(err));
   }, []);
-
-  const handleSearch = (event) => {
-    event.preventDefault();
-    const filteredResults = originalData.filter((item) =>
-      item.coursename.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    setFilteredData(filteredResults);
-  };
-
-  const handleDelete = id => {
-    axios
-      .delete(`http://localhost:8081/deletecourse/${id}`)
-      .then(res => {
-        if (res.data.Status === 'Success') {
-          // Reload the page or update the state as needed
-          window.location.reload(true);
-        } else {
+  useEffect(() => {
+		const isAuthenticated = localStorage.getItem('authenticatedAdmin');
+		if (isAuthenticated !== 'true') {
+		  navigate('/login');
+		}
+	  });
+    const filterData = () => {
+      const filteredResults = originalData.filter((item) =>
+        item.coursename.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredData(filteredResults);
+    };
+    
+    const handleSearch = (event) => {
+      event.preventDefault();
+      filterData();
+    };
+    
+    const handleDelete = id => {
+      const deleteCourse = async () => {
+        try {
+          const res = await axios.delete(`http://localhost:8081/deletecourse/${id}`);
+          if (res.data.Status === 'Success') {
+            // Reload the page or update the state as needed
+            window.location.reload(true);
+          } else {
+            alert('Error: Unable to delete course');
+          }
+        } catch (err) {
+          console.error('Error while deleting course:', err);
           alert('Error: Unable to delete course');
         }
-      })
-      .catch(err => {
-        console.error('Error while deleting course:', err);
-        alert('Error: Unable to delete course');
-      });
-  };
+      };
+    
+      deleteCourse();
+    };
+    
 
   return (
     <>

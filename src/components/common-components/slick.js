@@ -4,17 +4,29 @@ function SampleNextArrow(props) {
     return (
       <div
         className={className}
-        style={{ ...style, display: "block", background: "#12a89d", borderRadius:'50%',padding:'7px 7px',position:'absolute',right:'-10px' }}
+        style={{ ...style, display: "block", background: "#12a89d", borderRadius:'50%',padding:'7px 7px',position:'absolute',right:'-10px',zIndex:'1' }}
         onClick={onClick}
       />
     );
   }
-  function SamplePrevArrow(props) {
+
+  function NoArrow(props) {
     const { className, style, onClick } = props;
     return (
       <div
         className={className}
         style={{ ...style, display: "none" }}
+        onClick={onClick}
+      />
+    );
+  }
+
+  function SamplePrevArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{ ...style, display: "block", background: "#12a89d", borderRadius:'50%',padding:'7px 7px',position:'absolute',left:'-10px', zIndex:'1' }}
         onClick={onClick}
       />
     );
@@ -28,11 +40,13 @@ function SampleNextArrow(props) {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 1500,
+    nextArrow:<NoArrow/>,
+    prevArrow:<NoArrow/>
   };
 
   const settings = {
     dots: true,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,

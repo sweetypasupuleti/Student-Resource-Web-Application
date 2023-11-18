@@ -1,32 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./Profile.css";
 
 function Profile() {
   const [userData, setUserData] = useState({
-    id: '',
-    firstname: '',
-    lastname: '',
-    email: '',
-    dob: '',
-    phone: '',
-    password: '',
-    profilePic: '',
+    id: "",
+    firstname: "",
+    lastname: "",
+    email: "",
+    dob: "",
+    phone: "",
+    password: "",
+    profilePic: "",
   });
 
   useEffect(() => {
-    const studentId = localStorage.getItem('studentId');
+    const studentId = localStorage.getItem("studentId");
     if (studentId) {
       axios
         .get(`http://localhost:8081/students/${studentId}`)
         .then((response) => {
-          if (response.data.Status === 'Success') {
+          if (response.data.Status === "Success") {
             setUserData(response.data.data);
           } else {
-            console.error('Error fetching user data');
+            console.error("Error fetching user data");
           }
         })
         .catch((error) => {
-          console.error('Error fetching user data: ', error);
+          console.error("Error fetching user data: ", error);
         });
     }
   }, []);
@@ -44,52 +45,54 @@ function Profile() {
     const file = event.target.files[0];
     if (file) {
       const formData = new FormData();
-      formData.append('profilePic', file);
+      formData.append("profilePic", file);
 
       axios
         .post(`http://localhost:8081/uploadProfilePic`, formData, {
           headers: {
-            'Content-Type': 'multipart/form-data',
+            "Content-Type": "multipart/form-data",
           },
         })
         .then((response) => {
-          if (response.data.Status === 'Success') {
+          if (response.data.Status === "Success") {
             setUserData((prevData) => ({
               ...prevData,
               profilePic: response.data.profilePicURL,
             }));
           } else {
-            console.error('Error uploading profile picture');
+            console.error("Error uploading profile picture");
           }
         })
         .catch((error) => {
-          console.error('Error uploading profile picture: ', error);
+          console.error("Error uploading profile picture: ", error);
         });
     }
   };
 
   const handleSubmit = () => {
-    const studentId = localStorage.getItem('studentId');
+    const studentId = localStorage.getItem("studentId");
     if (studentId) {
       axios
         .put(`http://localhost:8081/students/${studentId}`, userData)
         .then((response) => {
-          if (response.data.Status === 'Success') {
+          if (response.data.Status === "Success") {
             // Data updated successfully
             // You can also show a success message to the user
           } else {
-            console.error('Error updating user data');
+            console.error("Error updating user data");
           }
         })
         .catch((error) => {
-          console.error('Error updating user data: ', error);
+          console.error("Error updating user data: ", error);
         });
     }
   };
 
   return (
     <div>
-      <h1>Profile Page</h1>
+      <h1>
+        <center>Profile Page</center>
+      </h1>
       <form>
         <div>
           <label>First Name</label>
@@ -153,9 +156,10 @@ function Profile() {
             onChange={handleProfilePicUpload}
           />
         </div>
-        <button onClick={handleSubmit}>Update Profile</button>
+        <button className="update-prof" onClick={handleSubmit}>
+          Update Profile
+        </button>
       </form>
-
     </div>
   );
 }
