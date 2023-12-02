@@ -21,7 +21,7 @@ body {
   }
   
   .rbc-event {
-    background-color: #12a89d;
+    background-color: #3498db;
     color: #fff;
     border: none;
     border-radius: 10px;
@@ -93,7 +93,7 @@ body {
   }
   
   .add-event-button {
-    background-color: #12a89d;
+    background-color: #27ae60;
     color: #fff;
     padding: 10px 20px;
     border: none;

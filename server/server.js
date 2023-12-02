@@ -5,9 +5,6 @@ import cookieParser from 'cookie-parser'
 import bodyParser from "body-parser";
 import multer from "multer";
 import path from 'path'; 
-import dotenv from 'dotenv'; // Import dotenv
-
-dotenv.config(); // Load environment variables from .env file
 
 const app = express();
 app.use(cors());
@@ -30,10 +27,9 @@ con.connect(function(err) {
         console.log("SQL server Connected");
     }
 })
-
-app.listen(process.env.SERVER_PORT, () => {
-  console.log("Running");
-});
+app.listen(8081, ()=> {
+    console.log("Running");
+})
 
 // Configure Multer for profile picture uploads
 const storage = multer.diskStorage({

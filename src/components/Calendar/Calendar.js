@@ -29,6 +29,9 @@ function EventComponent({ event }) {
   return (
     <div>
       <strong>{event.title}</strong>
+      {event.link && <p>Link: {event.link}</p>}
+      {event.time && <p>Time: {event.time}</p>}
+      {event.endtime && <p>End Time: {event.endtime}</p>}
     </div>
   );
 }
@@ -55,7 +58,7 @@ function CalendarApp() {
   useEffect(() => {
     // Fetch events from the server
     axios
-      .get("https://student-hub-portal.onrender.com/events")
+      .get("http://localhost:8081/events")
       .then((response) => {
         setAllEvents(response.data.Result); // Assuming events are in the 'Result' property of the response
       })
@@ -71,7 +74,7 @@ function CalendarApp() {
 
     // Send the new event to the server
     axios
-      .post("https://student-hub-portal.onrender.com/insertevents", {
+      .post("http://localhost:8081/insertevents", {
         title: newEvent.title,
         start: formattedStart,
         end: formattedEnd,

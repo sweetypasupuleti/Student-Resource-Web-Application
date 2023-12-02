@@ -41,7 +41,7 @@ function Araiseproblem() {
 
     // Call backend to update status
     axios
-      .put("https://student-hub-portal.onrender.com/updateproblem", {
+      .put("http://localhost:8081/updateproblem", {
         id: id,
         stat: newStatus,
       })
@@ -67,7 +67,7 @@ function Araiseproblem() {
 
   useEffect(() => {
     axios
-      .get("https://student-hub-portal.onrender.com/getproblem")
+      .get("http://localhost:8081/getproblem")
       .then((res) => {
         if (res.data.Status === "Success") {
           console.log(res.data.Result);
@@ -151,7 +151,7 @@ function Araiseproblem() {
                   let buttonText, buttonColor;
 
                   if (currentStatus === "unverified") {
-                    buttonText = "Contribute";
+                    buttonText = "Approve";
                     buttonColor = "lightgrey";
                   } else {
                     buttonText = "Verified";

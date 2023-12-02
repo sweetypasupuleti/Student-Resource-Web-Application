@@ -46,6 +46,7 @@ function App() {
             <Route path='/admincourses' element={<Admincourse/>}/>
             <Route path='/editcourse/:id' element={<EditCourse />}></Route>
             <Route path='/addcourse' element={<Addcourse/>}/>
+            <Route path='/login' element={<Login/>}/>
             <Route path='/signup' element={<Signup/>}/>
             <Route path='/calendar' element={<Calender/>}/>
             <Route path='/profile' element={<Profile/>}/>
