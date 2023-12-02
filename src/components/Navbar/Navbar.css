@@ -68,6 +68,9 @@
     margin: 5px 10px;
     border-radius: 10px;
     text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .nav-names.active{
     background-color: white;

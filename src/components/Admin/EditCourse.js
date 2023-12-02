@@ -14,10 +14,15 @@ function EditCourse() {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  
+  useEffect(() => {
+		const isAuthenticated = localStorage.getItem('authenticatedAdmin');
+		if (isAuthenticated !== 'true') {
+		  navigate('/login');
+		}
+	  });
 
   useEffect(() => {
-    axios.get(`http://localhost:8081/getcourses/` + id)
+    axios.get(`https://student-hub-portal.onrender.com/getcourse/` + id)
       .then(res => {
         const {
             id,	
@@ -47,7 +52,7 @@ function EditCourse() {
   const handleSubmit = event => {
     event.preventDefault();
     axios
-      .put(`http://localhost:8081/updatecourse/` + id, formValues)
+      .put(`https://student-hub-portal.onrender.com/updatecourse/` + id, formValues)
       .then(res => {
         if (res.data.Status === 'Success') {
           // Redirect to the appropriate page or update the state as needed

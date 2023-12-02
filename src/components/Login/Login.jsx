@@ -9,48 +9,50 @@ function Login() {
     password: ''
   });
   const navigate = useNavigate();
-  const [errors, setErrors] = useState({
-    email: '',
-    password: ''
-  });
+  // eslint-disable-next-line
+  const [studentId, setstudentId] = useState(null);  
 
   const handleInput = (event) => {
     setFormData((prev) => ({ ...prev, [event.target.name]: event.target.value }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     
-    // Validation
-    if (formData.email === '') {
-      setErrors((prev) => ({ ...prev, email: 'Email should not be empty' }));
-    } else {
-      setErrors((prev) => ({ ...prev, email: '' }));
-    }
+    const isAdminLogin = formData.email === 'admin@gmail.com' && formData.password === 'admin';
+    if (isAdminLogin) {
 
-    if (formData.password === '') {
-      setErrors((prev) => ({ ...prev, password: 'Password should not be empty' }));
-    } else if (formData.password.length < 2) {
-      setErrors((prev) => ({ ...prev, password: 'Password should be at least 2 characters long' }));
+      localStorage.setItem('authenticatedUser', false);
+      localStorage.setItem('authenticatedAdmin', true);
+      navigate('/admincourses');
     } else {
-      setErrors((prev) => ({ ...prev, password: '' }));
-    }
-    if (errors.email === '' && errors.password === '') {
-      axios
-        .post('http://localhost:8081/login', formData)
+
+      // Make an API request to the login endpoint without validation
+      const loginEndpoint = 'https://student-hub-portal.onrender.com/login'; // Define the endpoint separately
+      axios.post(loginEndpoint, formData)
+
         .then((res) => {
-          if (res.data.Status === 'Success') {
-            if (formData.email === "admin@gmail.com" && formData.password === "admin") {
-              navigate('/admincourses');
-            } else {
-              navigate('/courses');
-            }
+          const isLoginSuccessful = res.data.Status === 'Success';
+          if (isLoginSuccessful) {
+
+          
+            localStorage.setItem('authenticatedUser', true);
+            localStorage.setItem('authenticatedAdmin', false);
+            const studentId = res.data.studentId;
+            localStorage.setItem('studentId', studentId); // Store userId in localStorage
+            setstudentId(studentId); 
+            navigate('/home', { replace: true }); // Navigate back to the home page without a full page reload
           } else {
             navigate('/signup');
-            alert('Invalid Credentials. Please Register');
           }
         })
-        .catch((err) => console.log(err));
+        .catch((err) =>{
+          if(err){
+            alert("Invalid Credentials. Please Register"); // Handle 401 status
+            navigate('/signup');
+            console.log(err)
+          }
+        })
     }
   };
 
@@ -68,10 +70,9 @@ function Login() {
             value={formData.email}
             placeholder="Enter email"
             onChange={handleInput}
-            required
+            required // Add required attribute
             className="form-control"
           />
-          {errors.email && <p className="error">{errors.email}</p>}
         </div>
         <div className="form-group">
           <label htmlFor="password">
@@ -83,23 +84,21 @@ function Login() {
             value={formData.password}
             placeholder="Enter Password"
             onChange={handleInput}
-            required
+            required // Add required attribute
             className="form-control"
           />
-          {errors.password && <p className="error">{errors.password}</p>}
         </div>
-
-        <button type="submit" className="btn btn-primary" id="login">
-          Login
-        </button>
-        <button
-          type="button"
-          onClick={() => navigate('/signup')}
-          className="btn btn-secondary"
-          id="signup"
-        >
-          Sign Up
-        </button>
+        <div className='login-signup-btns'>
+          <button type="submit" className="btn btn-primary" id="login">
+            Login
+          </button>
+          <button
+            type="button"
+            onClick={() => navigate('/signup')}
+            className="btn btn-secondary" id="signup">
+            Sign Up
+          </button>
+        </div>
       </form>
     </div>
   );

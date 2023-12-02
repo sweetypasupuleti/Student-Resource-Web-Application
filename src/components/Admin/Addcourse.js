@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "./EditCourse.css"; 
 
@@ -10,8 +10,13 @@ function Addcourse() {
     description: '',
     duration: ''
   });
-
   const navigate = useNavigate();
+  useEffect(() => {
+		const isAuthenticated = localStorage.getItem('authenticatedAdmin');
+		if (isAuthenticated !== 'true') {
+		  navigate('/login');
+		}
+	  });
 
   const handleInput = event => {
     const { name, value } = event.target;
@@ -21,7 +26,7 @@ function Addcourse() {
   const handleSubmit = event => {
     event.preventDefault();
     axios
-      .post(`http://localhost:8081/addcourse`, formValues)
+      .post(`https://student-hub-portal.onrender.com/addcourse`, formValues)
       .then(res => {
         if (res.data.status === 'Success') {
           navigate('/admincourses');
